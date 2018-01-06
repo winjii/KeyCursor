@@ -17,11 +17,17 @@ private:
 
 	LineString _locus;
 
+	Vec2 _leftStickDir, _rightStickDir;
+
 public:
 
 	KeyCursor(const DevicePos &pos);
 	
 	void update();
+
+	Vec2 leftStickDir() const;
+
+	Vec2 rightStickDir() const;
 
 	DevicePos getPos() const;
 };

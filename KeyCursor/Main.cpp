@@ -12,6 +12,8 @@ void Main()
 	Font font(30);
 	Vec2 lastPos = cursor.getPos();
 	RectF rect(Vec2(0, 25), Vec2(Window::Width(), Window::Height() - 25));
+	Circle lStick(Vec2(110, Window::Height() - 110), 110);
+	Circle rStick(Vec2(Window::Width() - 110, Window::Height() - 110), 100);
 	while (System::Update()) {
 		cursor.update();
 		Color color = Palette::Black;
@@ -22,7 +24,7 @@ void Main()
 				sw.start();
 			}
 		}
-		else if (sw.isRunning() && (KeySpace.down() || sw.elapsed().count() > 20*1000)) {
+		else if (sw.isRunning() && (KeySpace.down() || sw.elapsed().count() > 30*1000)) {
 			sw.reset();
 		}
 		else if (sw.isRunning()) {
@@ -36,6 +38,12 @@ void Main()
 		font(L"スペースキーで開始/停止").draw(Arg::topCenter(Vec2(Window::Width()/2, 0)), Palette::Black);
 		font(sw.format()).draw(Arg::topLeft(20, 20), color);
 		font(score).draw(Arg::topRight(Vec2(Window::Width() - 50, 20)), color);
+		Color stickColor(Palette::Black, 50);
+		lStick.draw(Color(Palette::Black, 20));
+		rStick.draw(Color(Palette::Black, 20));
+		Line(lStick.center, lStick.center + cursor.leftStickDir()*lStick.r).drawArrow(20, Vec2(30, 30), stickColor);
+		Line(rStick.center, rStick.center + cursor.rightStickDir()*rStick.r).drawArrow(20, Vec2(30, 30), stickColor);
+
 		lastPos = cursor.getPos();
 	}
 }

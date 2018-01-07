@@ -24,9 +24,9 @@ void Main()
 				sw.start();
 			}
 		}
-		else if (sw.isRunning() && (KeySpace.down() || sw.elapsed().count() > 30*1000)) {
+		/*else if (sw.isRunning() && (KeySpace.down() || sw.elapsed().count() > 30*1000)) {
 			sw.reset();
-		}
+		}*/
 		else if (sw.isRunning()) {
 			if (c.intersects(Line(lastPos, cursor.getPos()))) {
 				c = Circle(RandomVec2(rect), 10);
@@ -36,7 +36,7 @@ void Main()
 			c.draw(Palette::Red);
 		}
 		font(L"スペースキーで開始/停止").draw(Arg::topCenter(Vec2(Window::Width()/2, 0)), Palette::Black);
-		font(sw.format()).draw(Arg::topLeft(20, 20), color);
+		//font(sw.format()).draw(Arg::topLeft(20, 20), color);
 		font(score).draw(Arg::topRight(Vec2(Window::Width() - 50, 20)), color);
 		Color stickColor(Palette::Black, 50);
 		lStick.draw(Color(Palette::Black, 20));
